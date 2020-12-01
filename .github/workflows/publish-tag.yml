@@ -53,10 +53,14 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
+          echo "TOTO" > toto.log
 
       - name: Read changelog
         run: | 
           echo "${CHANGELOG}"
+          echo "a"
+          ls toto.log
+          echo "b"
 
 
       # - name: Create Github Release
