@@ -2,8 +2,6 @@ name: Publish Tag
 
 on:
   push:
-    branches:
-      - "*"
     tags:
       - v*.*.* # Push events to v1.0.0, ...
 
@@ -46,7 +44,7 @@ jobs:
           cat $GITHUB_ENV
           VERSION="$(npm run --silent getVersion)"
           echo "$VERSION"
-          cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d'
+          cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d' > toto.log
           CHANGELOG="$(cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d')"
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
@@ -61,16 +59,17 @@ jobs:
           echo "a"
           ls toto.log
           echo "b"
+          cat toto.log
 
 
-      # - name: Create Github Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
-      #     # body: ${ CHANGELOG }
-      #     draft: true
-      #     prerelease: false
+      - name: Create Github Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body_path: toto.log
+          draft: true
+          prerelease: false
