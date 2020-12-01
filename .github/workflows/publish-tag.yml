@@ -48,7 +48,9 @@ jobs:
           echo "$VERSION"
           cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d'
           CHANGELOG="$(cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d')"
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
 
