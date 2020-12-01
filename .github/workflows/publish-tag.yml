@@ -1,4 +1,4 @@
-name: Publish
+name: Publish Tag
 
 on:
   push:
@@ -43,7 +43,8 @@ jobs:
 
       - name: Extract changelog
         run: | 
-          CHANGELOG=$(cat CHANGELOG.md | sed -n '/3.8.2/,/## /p' | sed -e '$ d')"
+          cat $GITHUB_ENV
+          CHANGELOG="$(cat CHANGELOG.md | sed -n '/3.8.2/,/## /p' | sed -e '$ d')"
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
