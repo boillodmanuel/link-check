@@ -44,8 +44,8 @@ jobs:
           cat $GITHUB_ENV
           VERSION="$(npm run --silent getVersion)"
           echo "$VERSION"
-          cat CHANGELOG.md | sed -n "/${VERSION}/,/## /p" | sed -e '$ d'
-          CHANGELOG="$(cat CHANGELOG.md | sed -n "/${VERSION}/,/## /p" | sed -e '$ d')"
+          cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d'
+          CHANGELOG="$(cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d')"
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
@@ -53,7 +53,8 @@ jobs:
 
       - name: Read changelog
         run: | 
-          npm run --silent getVersion
+          echo "ENV: " $env:GITHUB_ENV
+
 
       # - name: Create Github Release
       #   id: create_release
