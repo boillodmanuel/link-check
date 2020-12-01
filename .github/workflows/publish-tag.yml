@@ -41,26 +41,8 @@ jobs:
 
       - name: Extract changelog
         run: | 
-          cat $GITHUB_ENV
           VERSION="$(npm run --silent getVersion)"
-          echo "$VERSION"
-          cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d' > toto.log
-          CHANGELOG="$(cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d')"
-          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          echo "$CHANGELOG"
-          echo "${CHANGELOG}"
-          echo "TOTO" > toto.log
-
-      - name: Read changelog
-        run: | 
-          echo "${CHANGELOG}"
-          echo "a"
-          ls toto.log
-          echo "b"
-          cat toto.log
-
+          cat CHANGELOG.md | sed -n "/## \[${VERSION}\]/,/## \[/p" | sed -e '$ d' > CHANGELOG_CURRENT_VERSION.md
 
       - name: Create Github Release
         id: create_release
@@ -70,6 +52,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body_path: toto.log
+          body_path: CHANGELOG_CURRENT_VERSION.md
           draft: true
           prerelease: false
