@@ -2,6 +2,8 @@ name: Publish Tag
 
 on:
   push:
+    branches:
+      - "*"
     tags:
       - v*.*.* # Push events to v1.0.0, ...
 
