@@ -32,30 +32,37 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Publish to npmjs
-        run: |
-          npm build
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish to npmjs
+      #   run: |
+      #     npm build
+      #     npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Extract changelog
-      #   run: | 
-      #     cat $GITHUB_ENV
-      #     CHANGELOG="$(cat CHANGELOG.md | sed -n "/${{ github.event.release.tag_name }}/,/## /p" | sed -e '$ d')"
-      #     echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
-      #     echo "$CHANGELOG"
-      #     echo "${CHANGELOG}"
-      #     cat $GITHUB_ENV
+      - name: Extract changelog
+        run: | 
+          cat $GITHUB_ENV
+          VERSION="$(npm run --silent getVersion)"
+          echo "$VERSION"
+          cat CHANGELOG.md | sed -n "/${VERSION}/,/## /p" | sed -e '$ d'
+          CHANGELOG="$(cat CHANGELOG.md | sed -n "/${VERSION}/,/## /p" | sed -e '$ d')"
+          echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
+          echo "$CHANGELOG"
+          echo "${CHANGELOG}"
+          cat $env:GITHUB_ENV
 
-      - name: Create Github Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          # body: ${ CHANGELOG }
-          draft: true
-          prerelease: false
+      - name: Read changelog
+        run: | 
+          npm run --silent getVersion
+
+      # - name: Create Github Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     # body: ${ CHANGELOG }
+      #     draft: true
+      #     prerelease: false
