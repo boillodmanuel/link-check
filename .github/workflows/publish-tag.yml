@@ -2,8 +2,6 @@ name: Publish Tag
 
 on:
   push:
-    branches:
-      - "*"
     tags:
       - v*.*.* # Push events to v1.0.0, ...
 
@@ -44,7 +42,7 @@ jobs:
       - name: Extract changelog
         run: | 
           cat $GITHUB_ENV
-          CHANGELOG="$(cat CHANGELOG.md | sed -n '/3.8.2/,/## /p' | sed -e '$ d')"
+          CHANGELOG="$(cat CHANGELOG.md | sed -n "/${{ github.event.release.tag_name }}/,/## /p" | sed -e '$ d')"
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
