@@ -51,12 +51,10 @@ jobs:
           echo "CHANGELOG=$CHANGELOG" >> $GITHUB_ENV
           echo "$CHANGELOG"
           echo "${CHANGELOG}"
-          echo $env:GITHUB_ENV
 
       - name: Read changelog
         run: | 
           echo "${CHANGELOG}"
-          echo "ENV: " $env:GITHUB_ENV
 
 
       # - name: Create Github Release
