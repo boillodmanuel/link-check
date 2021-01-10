@@ -2,6 +2,10 @@
 
 ## [Unreleased][]
 
+### Changes
+
+- Upate [./README.md] to mention fork and improvements made
+
 ## [5.4.0][] - 2020-12-02
 
 ### Changes
