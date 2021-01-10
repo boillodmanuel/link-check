@@ -1,5 +1,9 @@
 ![Test library workflow status](https://github.com/tcort/link-check/workflows/Test%20library/badge.svg)
 
+ℹ️ Fork of [tcort](https://github.com/tcort/link-check) repository (version 4.5.2), with several improvements:
+- completely rewritten in typescript
+- see [CHANGELOG.md](./CHANGELOG.md) since v4.5.2 to get full list of improvements
+
 # link-check
 
 Checks whether a hyperlink is alive (`200 OK`) or dead.
