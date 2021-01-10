@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [5.5.0][] - 2021-01-10
+
 ### Changes
 
 - Upate [./README.md] to mention fork and improvements made
@@ -74,7 +76,8 @@
 - add CHANGELOG.md (Issue #17)
 
 
-[Unreleased]: https://github.com/boillodmanuel/link-check/compare/v5.4.0...HEAD
+[Unreleased]: https://github.com/boillodmanuel/link-check/compare/v5.5.0...HEAD
+[5.5.0]: https://github.com/boillodmanuel/link-check/compare/v5.4.0...v5.5.0
 [5.4.0]: https://github.com/boillodmanuel/link-check/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/boillodmanuel/link-check/compare/v5.2.0...v5.3.0
 [5.2.0]: https://github.com/boillodmanuel/link-check/compare/v5.1.0...v5.2.0
